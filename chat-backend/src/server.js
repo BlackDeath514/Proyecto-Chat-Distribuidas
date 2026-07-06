@@ -14,6 +14,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Ruta principal
+app.get('/', (req, res) => {
+  res.json({
+    message: 'API Chat Distribuido funcionando'
+  });
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/messages', messageRoutes);
