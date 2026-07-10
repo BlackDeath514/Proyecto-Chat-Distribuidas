@@ -1,4 +1,4 @@
-# 💬 Real-Time Distributed Chat
+# 💬 Proyecto Chat 
 
 ![Status](https://img.shields.io/badge/status-active-success)
 ![Node.js](https://img.shields.io/badge/Node.js-backend-green)
