@@ -1,0 +1,62 @@
+name: Chat Distribuido CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  backend:
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: chat-backend
+
+    steps:
+
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Instalar dependencias backend
+        run: npm install
+
+      - name: Generar Prisma Client
+        run: npx prisma generate
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+  frontend:
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: chat-frontend
+
+    steps:
+
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Instalar dependencias frontend
+        run: npm install
+
+      - name: Construir aplicación React
+        run: npm run build
